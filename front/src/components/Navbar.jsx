@@ -1,17 +1,46 @@
 import { NavLink } from "react-router-dom";
-
-const Navbar = (props) => {
+import {useEffect} from 'react'
+import axios from 'axios'
+const Nav = (props) => {
+  
+  useEffect(() => {
+    const jwtToken = localStorage.getItem("jwtToken")
+    if (!axios.defaults.headers.common["Authorization"] && jwtToken) {
+      axios.defaults.headers.common["Authorization"] = `Bearer ${jwtToken}`
+    }
+  }, [])
+  
   return (
     <nav>
       <ul>
         <li>
           <NavLink to="/">
-            Home
+            HOME
           </NavLink>
         </li>
         <li>
-          <NavLink to="/error">
-            POC error
+          <NavLink to="/contact">
+            contact
+          </NavLink>
+        </li>
+        <li>
+          <NavLink to="/profil">
+            profil
+          </NavLink>
+        </li>
+        <li>
+          <NavLink to="/product/react">
+            profil
+          </NavLink>
+        </li>
+        <li>
+          <NavLink to="/product/html">
+            profil
+          </NavLink>
+        </li>
+        <li>
+          <NavLink to="/testme">
+            profil
           </NavLink>
         </li>
       </ul>
@@ -19,4 +48,4 @@ const Navbar = (props) => {
   );
 };
 
-export default Navbar;
+export default Nav;
