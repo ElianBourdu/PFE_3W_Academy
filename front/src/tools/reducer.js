@@ -5,11 +5,11 @@ const reducer = (state, action) => {
                 ...state,
                 count: state.count + 1
             };
-        case 'REDUCE':
-            return {
-                ...state,
-                count: state.count - 1
-            };
+        // template 
+        // case '':
+        //     return {
+                
+        //     };
         default:
             return state;
     }
