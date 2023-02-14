@@ -20,7 +20,12 @@ const Navbar = (props) => {
                 </li>
                 <li>
                     <NavLink to="/CreateUser">
-                    Create User
+                    Create user
+                    </NavLink>
+                </li>
+                <li>
+                    <NavLink to="/ReadAllUsers">
+                    Read all users
                     </NavLink>
                 </li>
             </ul>
