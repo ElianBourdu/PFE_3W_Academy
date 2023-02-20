@@ -40,7 +40,7 @@ export default class User {
         }
     }
 
-    async register(data) {
+    async createUser(data) {
         const { last_name, first_name, email, password } = data;
         const sql = "INSERT INTO user (role__id, first_name, last_name, email, password) VALUES (?,?,?,?,?)";
 
@@ -66,7 +66,7 @@ export default class User {
             const mpdHash = await bcrypt.hash(password, this.saltRounds);
 
             // on creer la liste des params pour add user
-            const paramsSql = [1 ,first_name, last_name, email, mpdHash];
+            const paramsSql = [1, first_name, last_name, email, mpdHash];
 
             // on fait la requete
             const createUser = await this.asyncQuery(sql, paramsSql);
@@ -78,25 +78,9 @@ export default class User {
             console.log(err);
             return;
         }
-
     }
 
-    async deleteAccount({ id }) {
-        const sql = "DELETE FROM user WHERE id = ?";
-        const paramsSql = [id];
-
-        try {
-            const result = await this.asyncQuery(sql, paramsSql);
-            return result;
-        }
-        catch (err) {
-            console.log(err);
-            if (err) throw err;
-
-        }
-    }
-
-    async getAllUser() {
+    async readAllUser() {
         const sql = "SELECT * FROM user";
 
         try {
@@ -106,11 +90,10 @@ export default class User {
         catch (err) {
             console.log(err);
             if (err) throw err;
-
         }
     }
 
-    async getByID({ id }) {
+    async readByID({ id }) {
         const sql = "SELECT * FROM user WHERE id = ?";
 
         try {
@@ -120,7 +103,32 @@ export default class User {
         catch (err) {
             console.log(err);
             if (err) throw err;
-
         }
     }
+
+    async updateUser({ birth_date, last_name, first_name, email, id }) {
+        const sql = "UPDATE user SET birth_date = ?, last_name = ?, first_name = ?, email = ? WHERE id = ?";
+        try {
+            const result = await this.asyncQuery(sql, [birth_date, last_name, first_name, email, id]);
+            return result;
+        }
+        catch (err) {
+            console.log(err);
+            if (err) throw err;
+        }
+    }
+
+    async deleteUser({ id }) {
+        console.log(id);
+        const sql = "DELETE FROM user WHERE id = ?";
+        try {
+            const result = await this.asyncQuery(sql, [id]);
+            return result;
+        }
+        catch (err) {
+            console.log(err);
+            if (err) throw err;
+        }
+    }
+
 }

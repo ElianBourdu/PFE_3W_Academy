@@ -3,7 +3,7 @@ import bcrypt from "bcrypt";
 
 export default (req, res) => {
     const {password, email} = req.body;
-    const sql = "SELECT password FROM users WHERE email = ?";
+    const sql = "SELECT password FROM user WHERE email = ?";
     const paramsSql = [email];
     //
     pool.query(sql, paramsSql, async (err, result) => {

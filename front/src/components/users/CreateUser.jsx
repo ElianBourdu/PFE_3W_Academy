@@ -3,27 +3,29 @@ import { BASE_URL } from '../../tools/utils.js';
 import { useState } from "react";
 
 const AddUser = () => {
-    const [userData, setUserData] = useState({
+    const initialState = {
         last_name: '',
         first_name: '',
         email: '',
         password: ''
-    })
+    };
+    const [userData, setUserData] = useState(initialState);
 
     const handleChange = (e) => {
-        const { name, value } = e.target
-        setUserData({ ...userData, [name]: value })
-    }
+        const { name, value } = e.target;
+        setUserData({ ...userData, [name]: value });
+    };
 
     const submit = (e) => {
-        e.preventDefault()
+        e.preventDefault();
         axios.post(`${BASE_URL}/createUser`, {
             last_name: userData.last_name,
             first_name: userData.first_name,
             email: userData.email,
             password: userData.password
-        })
-    }
+        });
+        setUserData(initialState);
+    };
 
 
     return (
@@ -34,7 +36,7 @@ const AddUser = () => {
             <input type='text' placeholder='password' name='password' onChange={handleChange} value={userData.password} />
             <input type='submit' />
         </form>
-    )
-}
+    );
+};
 
-export default AddUser
+export default AddUser;

@@ -5,8 +5,8 @@ export default async (req, res) => {
     try {
         const bdd = new BDD();
         const user = new User(bdd);
-        const newUser = await user.createUser(req.body);
-        res.json({newUser});
+        const update = await user.updateUser(req.body);
+        res.json({update});
     } catch (err) {
         console.log(err);
         res.sendStatus(500);

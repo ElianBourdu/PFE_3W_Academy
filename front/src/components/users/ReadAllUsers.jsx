@@ -1,7 +1,7 @@
 import axios from "axios";
 import { BASE_URL } from '../../tools/utils.js';
 import { useEffect, useState } from "react";
-// import { NavLink } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 const ReadAllUsers = () => {
     const [usersList, setUsersList] = useState([]);
@@ -14,20 +14,21 @@ const ReadAllUsers = () => {
         }
     }, [usersList]);
 
-    // const deleteUser = (id) => {
-    //     axios.post(`${BASE_URL}/deleteUserById`, { id })
-    //         .then(res => console.log(res))
-    //         .catch(err => console.log(err));
-    // };
+    const deleteUser = (id) => {
+        axios.post(`${BASE_URL}/deleteUser`, { id })
+            .then(res => console.log(res))
+            .catch(err => console.log(err));
+    };
 
     return (
         <div>
+            { !usersList && (<p>loading</p>)}
             {usersList.map((user, i) => {
                 return(
                     <ul key={i}>
-                        {/*<li>Nom:<NavLink to={`/user/${user.id}`}>{user.last_name}</NavLink></li>*/}
+                        <li>Nom:<NavLink to={`/user/${user.id}`}>{user.last_name}</NavLink></li>
                         <li>Prenom: {user.first_name}</li>
-                        {/*<button onClick={() => deleteUser(user.id)}>X</button>*/}
+                        <button onClick={() => deleteUser(user.id)}>X</button>
                     </ul>
                 );
             })}
