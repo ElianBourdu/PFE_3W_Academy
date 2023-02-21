@@ -12,7 +12,7 @@ export default class User {
             const dataBDD = await this._emailExist(email);
 
             if (!dataBDD[0]) {
-                return { response: "email ou mot de passe invalide" };
+                return { res: "email ou mot de passe invalide" };
             }
 
             const passwordIsValide = await bcrypt.compare(password, dataBDD[0].password);
@@ -21,7 +21,7 @@ export default class User {
                 return { response: passwordIsValide };
             }
 
-            return { response: "email ou mot de passe invalide" };
+            return { res1: "email ou mot de passe invalide" };
         }
         catch (err) {
             return { error: err };
@@ -106,10 +106,11 @@ export default class User {
         }
     }
 
-    async updateUser({ birth_date, last_name, first_name, email, id }) {
-        const sql = "UPDATE user SET birth_date = ?, last_name = ?, first_name = ?, email = ? WHERE id = ?";
+    async updateUser({ birth_date, last_name, first_name, email, profil_picture, id }) {
+        console.log({ birth_date, last_name, first_name, email, profil_picture, id });
+        const sql = "UPDATE user SET birth_date = ?, last_name = ?, first_name = ?, email = ?, profil_picture = ? WHERE id = ?";
         try {
-            const result = await this.asyncQuery(sql, [birth_date, last_name, first_name, email, id]);
+            const result = await this.asyncQuery(sql, [birth_date, last_name, first_name, email, profil_picture, id]);
             return result;
         }
         catch (err) {

@@ -1,31 +1,36 @@
 import { NavLink } from "react-router-dom";
-// import {useEffect} from 'react';
-// import axios from 'axios';
+import {useEffect} from 'react';
+import axios from 'axios';
 const Navbar = (props) => {
 
-    // useEffect(() => {
-    //   const jwtToken = localStorage.getItem("jwtToken")
-    //   if (!axios.defaults.headers.common["Authorization"] && jwtToken) {
-    //     axios.defaults.headers.common["Authorization"] = `Bearer ${jwtToken}`
-    //   }
-    // }, [])
+    useEffect(() => {
+      const jwtToken = localStorage.getItem("jwtToken");
+      if (!axios.defaults.headers.common["Authorization"] && jwtToken) {
+        axios.defaults.headers.common["Authorization"] = `Bearer ${jwtToken}`;
+      }
+    }, []);
 
     return (
         <nav>
             <ul>
                 <li>
                     <NavLink to="/">
-                    HOME
+                        Home
                     </NavLink>
                 </li>
                 <li>
                     <NavLink to="/CreateUser">
-                    Create user
+                        Create user
                     </NavLink>
                 </li>
                 <li>
                     <NavLink to="/ReadAllUsers">
-                    Read all users
+                        Read all users
+                    </NavLink>
+                </li>
+                <li>
+                    <NavLink to="/Login">
+                        Login
                     </NavLink>
                 </li>
             </ul>

@@ -7,13 +7,16 @@ import Navbar from "./components/Navbar";
 import CreateUser from "./components/users/CreateUser";
 import ReadAllUsers from "./components/users/ReadAllUsers";
 import UpdateUser from "./components/users/UpdateUser";
+import Login from "./components/users/Login";
 
 const App = () => {
     return (
         <BrowserRouter>
             <Navbar />
             <Routes>
+                {/* Mains routes*/}
                 <Route path="/" element={<Home />} />
+                <Route path="/Login" element={<Login />} />
                 {/* Users routes*/}
                 <Route path="/CreateUser" element={<CreateUser />} />
                 <Route path="/ReadAllUsers" element={<ReadAllUsers />} />

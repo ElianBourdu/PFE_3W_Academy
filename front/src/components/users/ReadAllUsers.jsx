@@ -22,7 +22,7 @@ const ReadAllUsers = () => {
 
     return (
         <div>
-            { !usersList && (<p>loading</p>)}
+            { usersList.length === 0 && (<p>loading</p>)}
             {usersList.map((user, i) => {
                 return(
                     <ul key={i}>
