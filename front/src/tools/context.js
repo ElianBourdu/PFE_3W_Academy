@@ -3,7 +3,11 @@ import React from 'react';
 const StoreContext = React.createContext([]);
 
 const initialState = {
-    count: 0
+    user: {
+        isLogged: false,
+        isAdmin: false,
+        id: null
+    }
 };
 
 export {StoreContext, initialState};

@@ -8,6 +8,7 @@ import readAllUsersController from "../controllers/users/readAllUsersController.
 import updateUserController from "../controllers/users/updateUserController.js";
 import deleteUserController from "../controllers/users/deleteUserController.js";
 import readUserController from "../controllers/users/readUserController.js";
+import loginMiddleware from "../controllers/users/loginMiddleware.js";
 import loginController from "../controllers/users/loginController.js";
 
 const router = express.Router();
@@ -21,6 +22,6 @@ router.get("/readUsers", readAllUsersController);
 router.post("/updateUser", uploadFileMiddleware, updateUserController);
 router.post("/deleteUser", deleteUserController);
 router.post("/readUser", readUserController);
-router.post("/login", loginController);
+router.post("/login", loginMiddleware, loginController);
 
 export default router;

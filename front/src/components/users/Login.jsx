@@ -13,12 +13,13 @@ const Login = () => {
 
     const submit = (e) => {
         e.preventDefault();
-        axios.post(`${BASE_URL}/login`, { password: info.password, email: info.email })
+        axios.post(`${BASE_URL}/login`, { email: info.email, password: info.password })
             .then(res => {
                 console.log(res)
                 if (res.data.login) {
-                    localStorage.setItem('jwtToken', res.data.login.token);
-                    axios.defaults.headers.common['Authorization'] = 'Bearer ' + res.data.login.token;
+                    console.log(res.data.login)
+                    localStorage.setItem('jwtToken', res.data.login.response.token);
+                    axios.defaults.headers.common['Authorization'] = 'Bearer ' + res.data.login.response.token;
                     setInfo(initialState);
                 }
             });

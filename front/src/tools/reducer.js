@@ -10,6 +10,15 @@ const reducer = (state, action) => {
         //     return {
                 
         //     };
+        case 'LOGIN':
+            return {
+                ...state, 
+                user:{
+                    isLogged:true,
+                    isAdmin:action.payload.admin,
+                    ...action.payload
+                }
+            }
         default:
             return state;
     }

@@ -1,7 +1,7 @@
 import parseurl from 'parseurl';
-import { verifyToken } from "../config/token.js"
+import { verifyToken } from "../../config/token.js";
 
-const ADMIN_ROLE_ID = 5
+const ADMIN_ROLE_ID = 1;
 
 const paths = {
     ADMIN: ['TESTME'],
@@ -19,16 +19,19 @@ const getPathType = (pathname) => {
 };
 
 const isAccessAuthorized = (pathType, userData) => {
-    if (pathType === 'ADMIN' && userData.admin) return true
-    if (pathType === 'USER' && userData.user) return true
-    if (pathType === 'PUBLIC') return true
-    return false
+    if (pathType === 'ADMIN' && userData.admin) return true;
+    if (pathType === 'USER' && userData.user) return true;
+    if (pathType === 'PUBLIC') return true;
+    return false;
 };
 
 const middleware = async(req, res, next) => {
+    console.log(`req.body : ${JSON.stringify(req.body)}`);
     const pathname = parseurl(req).pathname.split('/')[1];
     const authHeader = req.headers['authorization'];
-    const pathType = getPathType(pathname)
+    console.log(`authHeader : ${authHeader}`);
+    const pathType = getPathType(pathname);
+    console.log(`pathType : ${pathType}`);
 
     if (pathType !== "PUBLIC") {
         if (!authHeader) {
