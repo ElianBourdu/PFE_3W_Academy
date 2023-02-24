@@ -5,7 +5,7 @@ const StoreContext = React.createContext([]);
 const initialState = {
     user: {
         isLogged: false,
-        isAdmin: false,
+        admin: false,
         id: null
     }
 };

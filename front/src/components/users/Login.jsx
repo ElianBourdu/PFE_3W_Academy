@@ -1,9 +1,11 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import axios from "axios";
 import { BASE_URL } from "../../tools/utils.js";
+import { StoreContext } from "../../tools/context.js";
 
 const Login = () => {
     const initialState = { email: '', password: '' };
+    const [state, dispatch] = useContext(StoreContext);
     const [info, setInfo] = useState(initialState);
 
     const handleChange = (e) => {
@@ -17,9 +19,10 @@ const Login = () => {
             .then(res => {
                 console.log(res)
                 if (res.data.login) {
-                    console.log(res.data.login)
                     localStorage.setItem('jwtToken', res.data.login.response.token);
                     axios.defaults.headers.common['Authorization'] = 'Bearer ' + res.data.login.response.token;
+                    dispatch({ type: "LOGIN", payload:res.data.login.response.response });
+                    console.log("state: " + JSON.stringify(state))
                     setInfo(initialState);
                 }
             });
