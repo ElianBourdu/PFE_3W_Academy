@@ -33,6 +33,11 @@ const Navbar = (props) => {
                         Login
                     </NavLink>
                 </li>
+                <li>
+                    <NavLink to="/CreateTopic">
+                        Create topic
+                    </NavLink>
+                </li>
             </ul>
         </nav>
     );

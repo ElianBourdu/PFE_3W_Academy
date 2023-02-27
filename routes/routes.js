@@ -11,8 +11,23 @@ import readUserController from "../controllers/users/readUserController.js";
 import loginMiddleware from "../controllers/users/loginMiddleware.js";
 import loginController from "../controllers/users/loginController.js";
 
-// MESSAGES
-import createMsgController from "../controllers/messages/createMsgController.js";
+// TOPICS
+import createTopicController from "../controllers/topics/createTopicController.js";
+import readAllTopicsController from "../controllers/topics/readAllTopicsController.js";
+import updateTopicController from "../controllers/topics/updateTopicController.js";
+import deleteTopicController from "../controllers/topics/deleteTopicController.js";
+
+// // THREADS
+// import createThreadController from "../controllers/messages/createThreadController.js";
+// import readAllThreadsController from "../controllers/messages/readAllThreadsController.js";
+// import updateThreadController from "../controllers/messages/updateThreadController.js";
+// import deleteThreadController from "../controllers/messages/deleteThreadController.js";
+
+// // MESSAGES
+// import createMsgController from "../controllers/messages/createMsgController.js";
+// import readAllMsgController from "../controllers/messages/readAllMsgController.js";
+// import updateMsgController from "../controllers/messages/updateMsgController.js";
+// import deleteMsgController from "../controllers/messages/deleteMsgController.js";
 
 const router = express.Router();
 
@@ -27,7 +42,22 @@ router.post("/deleteUser", deleteUserController);
 router.post("/readUser", readUserController);
 router.post("/login", loginMiddleware, loginController);
 
-// routes related to messages
-router.post("/createMsg", createMsgController);
+// routes related to topics
+router.post("/createTopic", createTopicController);
+router.get("/readTopics", readAllTopicsController);
+router.post("/updateTopic", updateTopicController);
+router.post("/deleteTopic", deleteTopicController);
+
+// // routes related to threads
+// router.post("/createThread", createThreadController);
+// router.get("/readThreads", readAllThreadsController);
+// router.post("/updateThread", updateThreadController);
+// router.post("/deleteThread", deleteThreadController);
+
+// // routes related to messages
+// router.post("/createMessage", createMsgController);
+// router.get("/readMessages", readAllMsgController);
+// router.post("/updateMessage", updateMsgController);
+// router.post("/deleteMessage", deleteMsgController);
 
 export default router;
