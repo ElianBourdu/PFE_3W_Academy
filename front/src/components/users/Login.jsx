@@ -17,12 +17,12 @@ const Login = () => {
         e.preventDefault();
         axios.post(`${BASE_URL}/login`, { email: info.email, password: info.password })
             .then(res => {
-                console.log(res)
+                console.log(res);
                 if (res.data.login) {
                     localStorage.setItem('jwtToken', res.data.login.response.token);
                     axios.defaults.headers.common['Authorization'] = 'Bearer ' + res.data.login.response.token;
                     dispatch({ type: "LOGIN", payload:res.data.login.response.response });
-                    console.log("state: " + JSON.stringify(state))
+                    console.log("state: " + JSON.stringify(state));
                     setInfo(initialState);
                 }
             });

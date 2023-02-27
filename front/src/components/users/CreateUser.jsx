@@ -9,6 +9,7 @@ const AddUser = () => {
         email: '',
         password: ''
     };
+    
     const [userData, setUserData] = useState(initialState);
 
     const handleChange = (e) => {

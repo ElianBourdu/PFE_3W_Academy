@@ -8,45 +8,10 @@ export default class User {
         this.saltRounds = 10;
     }
 
-    // async login({ email, password }) {
-    //     try {
-    //         const dataBDD = await this._emailExist(email);
-    //         console.log(dataBDD[0])
-    //         if (!dataBDD[0]) {
-    //             return { res: "email invalide" };
-    //         }
-
-    //         const passwordIsValide = await bcrypt.compare(password, dataBDD[0].password);
-
-    //         if (passwordIsValide) {
-    //             return { response: passwordIsValide };
-    //         }
-
-    //         return { res1: "mot de passe invalide" };
-    //     }
-    //     catch (err) {
-    //         return { error: err };
-    //     }
-    // }
-
-    // async _emailExist(email) {
-    //     try {
-    //         console.log("email : " + email)
-    //         const sql = "SELECT * FROM user WHERE email = ?";
-    //         const response = await this.asyncQuery(sql, [email]);
-    //         console.log(response)
-    //         if (response.length > 0) return response;
-    //         return false;
-    //     }
-    //     catch (err) {
-    //         return;
-    //     }
-    // }
-
     async generateResponse(userDataSQL) {
-        // ID du role Admin en BDD
+        // admin role id defined in BDD
         const ADMIN_ROLE_ID = 1;
-        // verifie si le user est admin return true OR false
+        // check admin right of a user, return true OR false
 
         const userData = {
             id: userDataSQL.id,
@@ -77,52 +42,57 @@ export default class User {
             const resultCompare = await bcrypt.compare(password, result[0].password);
             console.log(resultCompare);
             if (resultCompare) return { response };
-
-            return {response: null};
+            return { response: null };
         }
         catch (err) {
             console.log(err);
             if (err) throw err;
         }
     }
-    
+
+    async _emailExist(email) {
+        try {
+            const sql = "SELECT * FROM user WHERE email = ?";
+            const response = await this.asyncQuery(sql, [email]);
+            if (response.length > 0) return response;
+            return false;
+        }
+        catch (err) {
+            return;
+        }
+    }
+
     async createUser(data) {
         const { last_name, first_name, email, password } = data;
         const sql = "INSERT INTO user (role__id, first_name, last_name, email, password) VALUES (?,?,?,?,?)";
 
-        if (password.length <= 8) {
-            return { response: 'mdp trop court' };
-        }
+        if (password.length <= 8) return { response: 'password too short, the length must be 8 or more' };
 
         try {
-            // check duplicate mail in BDD
+            // check duplicate email in BDD
             const emailPresent = await this._emailExist(email);
 
-            // error a la verification de l'email
-            if (emailPresent === undefined) {
-                return;
-            }
+            // check occurring error
+            if (emailPresent === undefined) return { response: 'Error occurred while checking' };
 
-            // Email deja present en BDD 
-            if (emailPresent === true) {
-                return { response: 'email deja present' };
-            }
+            // email already in BDD 
+            if (emailPresent === true) return { response: 'Email already exist' };
 
-            // On hash le password
+            // hash password
             const mpdHash = await bcrypt.hash(password, this.saltRounds);
 
-            // on creer la liste des params pour add user
+            // create param list to add user
             const paramsSql = [1, first_name, last_name, email, mpdHash];
 
-            // on fait la requete
+            // request bdd
             const createUser = await this.asyncQuery(sql, paramsSql);
 
-            // on retourn la reponse
+            // return request
             return { response: createUser };
         }
         catch (err) {
             console.log(err);
-            return;
+            if (err) throw err;
         }
     }
 
