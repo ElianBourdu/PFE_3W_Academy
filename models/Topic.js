@@ -48,7 +48,7 @@ export default class Topic {
     }
 
     async readAllTopic() {
-        const sql = "SELECT title FROM topic";
+        const sql = "SELECT * FROM topic";
 
         try {
             const result = await this.asyncQuery(sql);

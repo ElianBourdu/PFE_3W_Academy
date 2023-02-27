@@ -16,7 +16,10 @@ const ReadAllTopics = () => {
 
     const deleteTopic = (id) => {
         axios.post(`${BASE_URL}/deleteTopic`, { id })
-            .then(res => console.log(res))
+            .then(res => {
+                console.log(res);
+                setTopicsList(topicsList.filter(topic => topic.id !== id));
+            })
             .catch(err => console.log(err));
     };
 

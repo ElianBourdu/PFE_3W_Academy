@@ -16,6 +16,7 @@ import createTopicController from "../controllers/topics/createTopicController.j
 import readAllTopicsController from "../controllers/topics/readAllTopicsController.js";
 import updateTopicController from "../controllers/topics/updateTopicController.js";
 import deleteTopicController from "../controllers/topics/deleteTopicController.js";
+import readTopicController from "../controllers/topics/readTopicController.js";
 
 // // THREADS
 // import createThreadController from "../controllers/messages/createThreadController.js";
@@ -47,6 +48,7 @@ router.post("/createTopic", createTopicController);
 router.get("/readTopics", readAllTopicsController);
 router.post("/updateTopic", updateTopicController);
 router.post("/deleteTopic", deleteTopicController);
+router.post("/readTopic", readTopicController);
 
 // // routes related to threads
 // router.post("/createThread", createThreadController);
