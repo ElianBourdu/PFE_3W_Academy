@@ -38,6 +38,11 @@ const Navbar = (props) => {
                         Create topic
                     </NavLink>
                 </li>
+                <li>
+                    <NavLink to="/ReadAllTopics">
+                        Read all topics
+                    </NavLink>
+                </li>
             </ul>
         </nav>
     );
