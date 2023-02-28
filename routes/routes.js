@@ -18,11 +18,12 @@ import updateTopicController from "../controllers/topics/updateTopicController.j
 import deleteTopicController from "../controllers/topics/deleteTopicController.js";
 import readTopicController from "../controllers/topics/readTopicController.js";
 
-// // THREADS
-// import createThreadController from "../controllers/messages/createThreadController.js";
-// import readAllThreadsController from "../controllers/messages/readAllThreadsController.js";
-// import updateThreadController from "../controllers/messages/updateThreadController.js";
-// import deleteThreadController from "../controllers/messages/deleteThreadController.js";
+// THREADS
+import createThreadController from "../controllers/threads/createThreadController.js";
+import readAllThreadsController from "../controllers/threads/readAllThreadsController.js";
+import updateThreadController from "../controllers/threads/updateThreadController.js";
+import deleteThreadController from "../controllers/threads/deleteThreadController.js";
+import readThreadController from "../controllers/threads/readThreadController.js";
 
 // // MESSAGES
 // import createMsgController from "../controllers/messages/createMsgController.js";
@@ -50,11 +51,12 @@ router.post("/updateTopic", updateTopicController);
 router.post("/deleteTopic", deleteTopicController);
 router.post("/readTopic", readTopicController);
 
-// // routes related to threads
-// router.post("/createThread", createThreadController);
-// router.get("/readThreads", readAllThreadsController);
-// router.post("/updateThread", updateThreadController);
-// router.post("/deleteThread", deleteThreadController);
+// routes related to threads
+router.post("/createThread", createThreadController);
+router.get("/readThreads", readAllThreadsController);
+router.post("/updateThread", updateThreadController);
+router.post("/deleteThread", deleteThreadController);
+router.post("/readThread", readThreadController);
 
 // // routes related to messages
 // router.post("/createMessage", createMsgController);

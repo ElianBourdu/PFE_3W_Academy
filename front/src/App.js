@@ -14,6 +14,11 @@ import CreateTopic from "./components/topics/CreateTopic";
 import ReadAllTopics from "./components/topics/ReadAllTopics";
 import UpdateTopic from "./components/topics/UpdateTopic";
 
+// Threads components
+import CreateThread from "./components/threads/CreateThread";
+import ReadAllThreads from "./components/threads/ReadAllThreads";
+import UpdateThread from "./components/threads/UpdateThread";
+
 const App = () => {
     return (
         <BrowserRouter>
@@ -32,6 +37,11 @@ const App = () => {
                 <Route path="/CreateTopic" element={<CreateTopic />} />
                 <Route path="/ReadAllTopics" element={<ReadAllTopics />} />
                 <Route path="/Topic/:id" element={<UpdateTopic />} />
+                
+                {/* Threads routes*/}
+                <Route path="/CreateThread" element={<CreateThread />} />
+                <Route path="/ReadAllThreads" element={<ReadAllThreads />} />
+                <Route path="/Thread/:id" element={<UpdateThread />} />
                 
                 <Route path="*" element={<Error404 />} />
             </Routes>
