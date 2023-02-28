@@ -24,7 +24,8 @@ const AddUser = () => {
             first_name: userData.first_name,
             email: userData.email,
             password: userData.password
-        });
+        })
+        .then(res => console.log(res));
         setUserData(initialState);
     };
 

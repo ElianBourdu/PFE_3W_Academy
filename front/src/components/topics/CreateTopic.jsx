@@ -14,7 +14,8 @@ const CreateTopic = () => {
 
     const submit = (e) => {
         e.preventDefault();
-        axios.post(`${BASE_URL}/createTopic`, { title: topicData.title });
+        axios.post(`${BASE_URL}/createTopic`, { title: topicData.title })
+        .then(res => console.log(res));
         setTopicData(initialState);
     };
 

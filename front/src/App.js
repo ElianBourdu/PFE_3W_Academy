@@ -19,6 +19,11 @@ import CreateThread from "./components/threads/CreateThread";
 import ReadAllThreads from "./components/threads/ReadAllThreads";
 import UpdateThread from "./components/threads/UpdateThread";
 
+// Messages components
+import CreateMessage from "./components/messages/CreateMessage";
+import ReadAllMessages from "./components/messages/ReadAllMessages";
+import UpdateMessage from "./components/messages/UpdateMessage";
+
 const App = () => {
     return (
         <BrowserRouter>
@@ -42,6 +47,11 @@ const App = () => {
                 <Route path="/CreateThread" element={<CreateThread />} />
                 <Route path="/ReadAllThreads" element={<ReadAllThreads />} />
                 <Route path="/Thread/:id" element={<UpdateThread />} />
+                
+                {/* Messages routes*/}
+                <Route path="/CreateMessage" element={<CreateMessage />} />
+                <Route path="/ReadAllMessages" element={<ReadAllMessages />} />
+                <Route path="/Message/:id" element={<UpdateMessage />} />
                 
                 <Route path="*" element={<Error404 />} />
             </Routes>

@@ -30,21 +30,17 @@ export default class Thread {
             paramsSql.push(group__id);
         }
 
-        console.log("SQL request: ", sql);
-        console.log("SQL params: ", paramsSql);
-
-        if (title.length <= 4) return { response: 'title too short, the length must be 4 or more' };
+        if (title.length <= 4) return { response: 'title too short, the length must be more than 4' };
 
         try {
             // check duplicate mail in BDD
             const titlePresent = await this._titleExist(title);
-
+            console.log("titlePresent: ", titlePresent)
             // check occurring error
             if (titlePresent === undefined) return { response: 'Error occurred while checking' };
 
             // title already in BDD 
-            if (titlePresent === true) return { response: 'Title already exist' };
-
+            if (titlePresent) return { response: 'Title already exist' };
 
             // request bdd
             const createThread = await this.asyncQuery(sql, paramsSql);

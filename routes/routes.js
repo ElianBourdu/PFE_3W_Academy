@@ -25,11 +25,12 @@ import updateThreadController from "../controllers/threads/updateThreadControlle
 import deleteThreadController from "../controllers/threads/deleteThreadController.js";
 import readThreadController from "../controllers/threads/readThreadController.js";
 
-// // MESSAGES
-// import createMsgController from "../controllers/messages/createMsgController.js";
-// import readAllMsgController from "../controllers/messages/readAllMsgController.js";
-// import updateMsgController from "../controllers/messages/updateMsgController.js";
-// import deleteMsgController from "../controllers/messages/deleteMsgController.js";
+// MESSAGES
+import createMsgController from "../controllers/messages/createMsgController.js";
+import readAllMsgController from "../controllers/messages/readAllMsgController.js";
+import updateMsgController from "../controllers/messages/updateMsgController.js";
+import deleteMsgController from "../controllers/messages/deleteMsgController.js";
+import readMsgController from "../controllers/messages/readMsgController.js";
 
 const router = express.Router();
 
@@ -58,10 +59,11 @@ router.post("/updateThread", updateThreadController);
 router.post("/deleteThread", deleteThreadController);
 router.post("/readThread", readThreadController);
 
-// // routes related to messages
-// router.post("/createMessage", createMsgController);
-// router.get("/readMessages", readAllMsgController);
-// router.post("/updateMessage", updateMsgController);
-// router.post("/deleteMessage", deleteMsgController);
+// routes related to messages
+router.post("/createMessage", createMsgController);
+router.get("/readMessages", readAllMsgController);
+router.post("/updateMessage", updateMsgController);
+router.post("/deleteMessage", deleteMsgController);
+router.post("/readMessage", readMsgController);
 
 export default router;

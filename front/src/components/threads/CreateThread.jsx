@@ -14,7 +14,8 @@ const CreateThread = () => {
 
     const submit = (e) => {
         e.preventDefault();
-        axios.post(`${BASE_URL}/createThread`, { title: threadData.title, topic__id: 6});
+        axios.post(`${BASE_URL}/createThread`, { title: threadData.title, topic__id: 6})
+            .then(res => console.log(res));
         setThreadData(initialState);
     };
 

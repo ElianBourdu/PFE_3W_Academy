@@ -53,6 +53,16 @@ const Navbar = (props) => {
                         Read all threads
                     </NavLink>
                 </li>
+                <li>
+                    <NavLink to="/CreateMessage">
+                        Create message
+                    </NavLink>
+                </li>
+                <li>
+                    <NavLink to="/ReadAllMessages">
+                        Read all messages
+                    </NavLink>
+                </li>
             </ul>
         </nav>
     );
