@@ -35,7 +35,7 @@ export default class Thread {
         try {
             // check duplicate mail in BDD
             const titlePresent = await this._titleExist(title);
-            console.log("titlePresent: ", titlePresent)
+            console.log("isTitlePresent: ", titlePresent)
             // check occurring error
             if (titlePresent === undefined) return { response: 'Error occurred while checking' };
 

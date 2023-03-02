@@ -1,9 +1,11 @@
 import axios from "axios";
 import { BASE_URL } from '../../tools/utils.js';
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { StoreContext } from '../../tools/context.js';
 
 const CreateTopic = () => {
-    const initialState = { title: ''};
+    const initialState = { title: '' };
+    const [state, dispatch] = useContext(StoreContext);
 
     const [topicData, setTopicData] = useState(initialState);
 
@@ -15,13 +17,17 @@ const CreateTopic = () => {
     const submit = (e) => {
         e.preventDefault();
         axios.post(`${BASE_URL}/createTopic`, { title: topicData.title })
-        .then(res => console.log(res));
+            .then(res => {
+                console.log(res);
+                dispatch({ type: "CREATE_TOPIC", payload: { id: res.data.newTopic.response.insertId, title: topicData.title } });
+            });
         setTopicData(initialState);
     };
 
 
     return (
         <form onSubmit={submit}>
+            <label htmlFor="title">Create your topic</label>
             <input type='text' placeholder='title' name='title' onChange={handleChange} value={topicData.title} />
             <input type='submit' />
         </form>

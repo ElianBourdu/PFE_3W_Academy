@@ -26,12 +26,9 @@ const isAccessAuthorized = (pathType, userData) => {
 };
 
 const middleware = async(req, res, next) => {
-    console.log(`req.body : ${JSON.stringify(req.body)}`);
     const pathname = parseurl(req).pathname.split('/')[1];
     const authHeader = req.headers['authorization'];
-    console.log(`authHeader : ${authHeader}`);
     const pathType = getPathType(pathname);
-    console.log(`pathType : ${pathType}`);
 
     if (pathType !== "PUBLIC") {
         if (!authHeader) {

@@ -1,17 +1,24 @@
 import { NavLink } from "react-router-dom";
-import {useEffect} from 'react';
+import { useEffect, useContext } from 'react';
 import axios from 'axios';
+import { StoreContext } from "../tools/context.js";
+
 const Navbar = (props) => {
+    const [state] = useContext(StoreContext);
 
     useEffect(() => {
-      const jwtToken = localStorage.getItem("jwtToken");
-      if (!axios.defaults.headers.common["Authorization"] && jwtToken) {
-        axios.defaults.headers.common["Authorization"] = `Bearer ${jwtToken}`;
-      }
-    }, []);
+        console.log(state);
+        const jwtToken = localStorage.getItem("jwtToken");
+        if (!axios.defaults.headers.common["Authorization"] && jwtToken) {
+            axios.defaults.headers.common["Authorization"] = `Bearer ${jwtToken}`;
+        }
+    }, [state]);
+
+
 
     return (
         <nav>
+            {state.user.isLogged && <p>Welcome {state.user.role_name} {state.user.first_name} {state.user.last_name}</p>}
             <ul>
                 <li>
                     <NavLink to="/">
@@ -28,16 +35,18 @@ const Navbar = (props) => {
                         Read all users
                     </NavLink>
                 </li>
+                { !state.user.isLogged && 
                 <li>
                     <NavLink to="/Login">
                         Login
                     </NavLink>
-                </li>
+                </li>}
+                { state.user.isLogged && 
                 <li>
                     <NavLink to="/Logout">
                         Logout
                     </NavLink>
-                </li>
+                </li>}
                 <li>
                     <NavLink to="/CreateTopic">
                         Create topic

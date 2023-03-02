@@ -1,9 +1,9 @@
 import axios from "axios";
 import { BASE_URL } from '../../tools/utils.js';
-import { useEffect, useState } from "react";
+import { useEffect, useState, Fragment } from "react";
 import { NavLink } from 'react-router-dom';
 
-const ReadAllThreads = () => {
+const ReadAllThreads = (topic__id = null, group__id = null) => {
     const [threadsList, setThreadsList] = useState([]);
 
     useEffect(() => {
@@ -24,17 +24,19 @@ const ReadAllThreads = () => {
     };
 
     return (
-        <div>
+        <Fragment>
             { threadsList.length === 0 && (<p>loading</p>)}
             {threadsList.map((thread, i) => {
                 return(
-                    <ul key={i}>
-                        <li>title: <NavLink to={`/thread/${thread.id}`}>{thread.title}</NavLink></li>
-                        <button onClick={() => deleteThread(thread.id)}>X</button>
-                    </ul>
+                    (topic__id.topic__id === thread.topic__id) && (
+                        <ul key={i}>
+                            <li>title: <NavLink to={`/thread/${thread.id}`}>{thread.title}</NavLink></li>
+                            <button onClick={() => deleteThread(thread.id)}>X</button>
+                        </ul>
+                    )
                 );
             })}
-        </div>
+        </Fragment>
     );
 };
 

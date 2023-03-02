@@ -10,6 +10,7 @@ import deleteUserController from "../controllers/users/deleteUserController.js";
 import readUserController from "../controllers/users/readUserController.js";
 import loginMiddleware from "../controllers/users/loginMiddleware.js";
 import loginController from "../controllers/users/loginController.js";
+import checkToken from "../controllers/users/checkToken.js";
 
 // TOPICS
 import createTopicController from "../controllers/topics/createTopicController.js";
@@ -35,7 +36,6 @@ import readMsgController from "../controllers/messages/readMsgController.js";
 const router = express.Router();
 
 router.get("/", testController);
-// router.post("/uploadFile", uploadFile);
 
 // routes related to users
 router.post("/createUser", createUserController);
@@ -44,6 +44,7 @@ router.post("/updateUser", uploadFileMiddleware, updateUserController);
 router.post("/deleteUser", deleteUserController);
 router.post("/readUser", readUserController);
 router.post("/login", loginMiddleware, loginController);
+router.get("/reconnection", checkToken);
 
 // routes related to topics
 router.post("/createTopic", createTopicController);

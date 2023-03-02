@@ -2,11 +2,13 @@ import { useState, useContext } from "react";
 import axios from "axios";
 import { BASE_URL } from "../../tools/utils.js";
 import { StoreContext } from "../../tools/context.js";
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
     const initialState = { email: '', password: '' };
     const [state, dispatch] = useContext(StoreContext);
     const [info, setInfo] = useState(initialState);
+    const navigate = useNavigate();
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -22,8 +24,8 @@ const Login = () => {
                     localStorage.setItem('jwtToken', res.data.login.response.token);
                     axios.defaults.headers.common['Authorization'] = 'Bearer ' + res.data.login.response.token;
                     dispatch({ type: "LOGIN", payload:res.data.login.response.response });
-                    console.log("state: " + JSON.stringify(state));
                     setInfo(initialState);
+                    navigate(`/`);
                 }
             });
     };

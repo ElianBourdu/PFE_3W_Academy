@@ -1,40 +1,49 @@
 import axios from "axios";
 import { BASE_URL } from '../../tools/utils.js';
-import { useEffect, useState } from "react";
+import { useEffect, useContext, Fragment } from "react";
 import { NavLink } from 'react-router-dom';
+import { StoreContext } from '../../tools/context.js';
+import ReadAllThreads from '../threads/ReadAllThreads';
+import CreateThread from '../threads/CreateThread';
 
 const ReadAllTopics = () => {
-    const [topicsList, setTopicsList] = useState([]);
+    const [state, dispatch] = useContext(StoreContext);
 
     useEffect(() => {
-        if (topicsList.length === 0) {
+        if (state.topics.length === 0) {
             axios.get(`${BASE_URL}/readTopics`)
-                .then(res => setTopicsList(res.data.allTopics))
+                .then(res => {
+                    dispatch({ type: "READ_ALL_TOPICS", payload:res.data.allTopics });
+                })
                 .catch(err => console.log(err));
         }
-    }, [topicsList]);
+    }, [state.topics]);
 
     const deleteTopic = (id) => {
         axios.post(`${BASE_URL}/deleteTopic`, { id })
             .then(res => {
                 console.log(res);
-                setTopicsList(topicsList.filter(topic => topic.id !== id));
+                dispatch({ type: "DELETE_TOPIC", payload:state.topics.filter(topic => topic.id !== id)});
             })
             .catch(err => console.log(err));
     };
 
     return (
-        <div>
-            { topicsList.length === 0 && (<p>loading</p>)}
-            {topicsList.map((topic, i) => {
+        <Fragment>
+            { state.topics.length === 0 && (<p>loading</p>)}
+            {state.topics.map((topic, i) => {
                 return(
-                    <ul key={i}>
-                        <li>title: <NavLink to={`/topic/${topic.id}`}>{topic.title}</NavLink></li>
-                        <button onClick={() => deleteTopic(topic.id)}>X</button>
-                    </ul>
+                    <div key={i}>
+                        <div className = "topic">
+                            <li>title: <NavLink to={`/topic/${topic.id}`}>{topic.title}</NavLink></li>
+                            { state.user.admin && <button onClick={() => deleteTopic(topic.id)}>X</button>}
+                        </div>
+                        <CreateThread topic__id={topic.id}/>
+                        <ReadAllThreads topic__id={topic.id}/>
+                    </div>
                 );
             })}
-        </div>
+        </Fragment>
     );
 };
 

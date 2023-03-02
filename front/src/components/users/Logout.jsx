@@ -12,7 +12,7 @@ const Logout = () => {
     },[]);
     
     return(
-        <div>bye</div>
+        <div>You are now disconnected</div>
     );
 };
 

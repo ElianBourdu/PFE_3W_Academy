@@ -1,3 +1,6 @@
+# images back that we don't push
+public/img
+
 # Logs
 logs
 *.log

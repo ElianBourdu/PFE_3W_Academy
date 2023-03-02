@@ -15,10 +15,13 @@ export default class User {
 
         const userData = {
             id: userDataSQL.id,
-            last_name: userDataSQL.last_name,
             first_name: userDataSQL.first_name,
-            email: userDataSQL.email,
-            user: true,
+            last_name: userDataSQL.last_name,
+            birth_date: userDataSQL.birth_date.toLocaleDateString('fr-FR'),
+            last_connection: userDataSQL.last_connection,
+            profil_picture: userDataSQL.profil_picture,
+            ban_date: userDataSQL.ban_date,
+            role_name: userDataSQL.role_name,
             admin: userDataSQL.role__id === ADMIN_ROLE_ID
         };
         try {
@@ -32,15 +35,20 @@ export default class User {
     }
 
     async login({ email, password }) {
-        const sql = "SELECT * FROM user WHERE email = ?";
+        // const sql = "SELECT * FROM user WHERE email = ?";
+        const sql = `
+        SELECT u.*, role_name 
+        FROM user u
+        JOIN role r
+        	ON u.role__id = r.id
+        WHERE email = ?
+        `;
         const paramsSql = [email];
 
         try {
             const result = await this.asyncQuery(sql, paramsSql);
             const response = await this.generateResponse(result[0]);
-            console.log(response);
             const resultCompare = await bcrypt.compare(password, result[0].password);
-            console.log(resultCompare);
             if (resultCompare) return { response };
             return { response: null };
         }
