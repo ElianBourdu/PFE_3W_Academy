@@ -34,6 +34,11 @@ const Navbar = (props) => {
                     </NavLink>
                 </li>
                 <li>
+                    <NavLink to="/Logout">
+                        Logout
+                    </NavLink>
+                </li>
+                <li>
                     <NavLink to="/CreateTopic">
                         Create topic
                     </NavLink>
