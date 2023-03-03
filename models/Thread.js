@@ -35,7 +35,6 @@ export default class Thread {
         try {
             // check duplicate mail in BDD
             const titlePresent = await this._titleExist(title);
-            console.log("isTitlePresent: ", titlePresent)
             // check occurring error
             if (titlePresent === undefined) return { response: 'Error occurred while checking' };
 
@@ -93,7 +92,6 @@ export default class Thread {
     }
 
     async deleteThread({ id }) {
-        console.log(id);
         const sql = "DELETE FROM thread WHERE id = ?";
         try {
             const result = await this.asyncQuery(sql, [id]);

@@ -37,12 +37,28 @@ const reducer = (state, action) => {
         case 'DELETE_TOPIC':
             return {
                 ...state,
-                topics: [
-                    action.payload
-                ]
+                topics: action.payload
             };
 
             // THREADS
+        case 'CREATE_THREAD':
+            return {
+                ...state,
+                ...state.threads.push(action.payload)
+            };
+        case 'READ_ALL_THREADS':
+            return {
+                ...state,
+                threads: [
+                    ...action.payload
+                ]
+            };
+        case 'DELETE_THREAD':
+            return {
+                ...state,
+                threads: action.payload
+            };
+
         default:
             return state;
     }

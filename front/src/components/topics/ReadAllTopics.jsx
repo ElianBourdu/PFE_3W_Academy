@@ -13,17 +13,24 @@ const ReadAllTopics = () => {
         if (state.topics.length === 0) {
             axios.get(`${BASE_URL}/readTopics`)
                 .then(res => {
-                    dispatch({ type: "READ_ALL_TOPICS", payload:res.data.allTopics });
+                    dispatch({ type: "READ_ALL_TOPICS", payload: res.data.allTopics });
                 })
                 .catch(err => console.log(err));
         }
-    }, [state.topics]);
+    }, [state.topics, state.threads]);
 
     const deleteTopic = (id) => {
         axios.post(`${BASE_URL}/deleteTopic`, { id })
             .then(res => {
                 console.log(res);
-                dispatch({ type: "DELETE_TOPIC", payload:state.topics.filter(topic => topic.id !== id)});
+                dispatch({
+                    type: "DELETE_THREAD",
+                    payload: state.threads.filter(thread => thread.topic__id !== id)
+                });
+                dispatch({
+                    type: "DELETE_TOPIC",
+                    payload: state.topics.filter(topic => topic.id !== id)
+                });
             })
             .catch(err => console.log(err));
     };
