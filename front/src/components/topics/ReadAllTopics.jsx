@@ -3,8 +3,8 @@ import { BASE_URL } from '../../tools/utils.js';
 import { useEffect, useContext, Fragment } from "react";
 import { NavLink } from 'react-router-dom';
 import { StoreContext } from '../../tools/context.js';
-import ReadAllThreads from '../threads/ReadAllThreads';
 import CreateThread from '../threads/CreateThread';
+import ReadAllThreads from '../threads/ReadAllThreads';
 
 const ReadAllTopics = () => {
     const [state, dispatch] = useContext(StoreContext);
@@ -45,8 +45,8 @@ const ReadAllTopics = () => {
                             <li>title: <NavLink to={`/topic/${topic.id}`}>{topic.title}</NavLink></li>
                             { state.user.admin && <button onClick={() => deleteTopic(topic.id)}>X</button>}
                         </div>
-                        <CreateThread topic__id={topic.id}/>
                         <ReadAllThreads topic__id={topic.id}/>
+                        <CreateThread topic__id={topic.id}/>
                     </div>
                 );
             })}

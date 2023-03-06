@@ -58,6 +58,25 @@ const reducer = (state, action) => {
                 ...state,
                 threads: action.payload
             };
+            
+            // MESSAGES
+        case 'CREATE_MESSAGE':
+            return {
+                ...state,
+                ...state.messages.push(action.payload)
+            };
+        case 'READ_ALL_MESSAGES':
+            return {
+                ...state,
+                messages: [
+                    ...action.payload
+                ]
+            };
+        case 'DELETE_MESSAGE':
+            return {
+                ...state,
+                messages: action.payload
+            };
 
         default:
             return state;

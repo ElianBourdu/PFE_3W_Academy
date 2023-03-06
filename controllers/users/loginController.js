@@ -6,7 +6,6 @@ export default async (req, res) => {
         const bdd = new BDD();
         const user = new User(bdd);
         const login = await user.login(req.body);
-        console.log(login)
         res.json({login});
     } catch (err) {
         console.log(err);

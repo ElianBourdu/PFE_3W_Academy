@@ -1,37 +1,50 @@
 import axios from "axios";
 import { BASE_URL } from '../../tools/utils.js';
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { StoreContext } from '../../tools/context.js';
 
-const AddUser = () => {
-    const initialState = {
-        content: ''
-    };
-
-    const [userData, setUserData] = useState(initialState);
+const CreateMessage = (thread__id) => {
+    const [state, dispatch] = useContext(StoreContext);
+    const initialState = { content: '' };
+    const [messageData, setMessageData] = useState(initialState);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
-        setUserData({ ...userData, [name]: value });
+        setMessageData({ ...messageData, [name]: value });
     };
 
     const submit = (e) => {
         e.preventDefault();
         axios
             .post(`${BASE_URL}/createMessage`, {
-                content: userData.content,
-                user__id: 2,
-                thread__id: 3
+                user__id: state.user.id,
+                thread__id: thread__id.thread__id,
+                content: messageData.content
             })
-            .then(res => console.log(res));
-        setUserData(initialState);
+            .then(res => {
+                console.log(res);
+                dispatch({
+                    type: "CREATE_MESSAGE",
+                    payload: {
+                        user__id: state.user.id,
+                        thread__id: thread__id.thread__id,
+                        quoted_message__id: null,
+                        content: messageData.content,
+                        publication_date: new Date(),
+                        like_count: 0,
+                        dislike_count: 0
+                    }
+                });
+                setMessageData(initialState);
+            });
     };
 
     return (
         <form onSubmit={submit}>
-            <textarea placeholder='type your message' name='content' onChange={handleChange} value={userData.content}></textarea>
+            <textarea placeholder='type your message' name='content' onChange={handleChange} value={messageData.content}></textarea>
             <input type='submit' />
         </form>
     );
 };
 
-export default AddUser;
+export default CreateMessage;

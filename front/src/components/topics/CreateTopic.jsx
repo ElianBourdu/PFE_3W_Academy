@@ -4,9 +4,8 @@ import { useState, useContext } from "react";
 import { StoreContext } from '../../tools/context.js';
 
 const CreateTopic = () => {
-    const initialState = { title: '' };
     const [state, dispatch] = useContext(StoreContext);
-
+    const initialState = { title: '' };
     const [topicData, setTopicData] = useState(initialState);
 
     const handleChange = (e) => {

@@ -4,7 +4,7 @@ import { useEffect, Fragment, useContext } from "react";
 import { StoreContext } from '../../tools/context.js';
 import { NavLink } from 'react-router-dom';
 
-const ReadAllthreads = (topic__id = null, group__id = null) => {
+const ReadAllthreads = (topic__id = null/*, group__id = null*/) => {
     const [state, dispatch] = useContext(StoreContext);
 
     useEffect(() => {
@@ -15,7 +15,7 @@ const ReadAllthreads = (topic__id = null, group__id = null) => {
                 })
                 .catch(err => console.log(err));
         }
-    }, [/*state.threads*/]);
+    }, [state.threads]);
 
     const deleteThread = (id) => {
         axios.post(`${BASE_URL}/deleteThread`, { id })
@@ -36,8 +36,10 @@ const ReadAllthreads = (topic__id = null, group__id = null) => {
                 return(
                     (topic__id.topic__id === thread.topic__id) && (
                         <ul key={i}>
-                            <li>title: <NavLink to={`/thread/${thread.id}`}>{thread.title}</NavLink></li>
-                            <button onClick={() => deleteThread(thread.id)}>X</button>
+                            <li>title: 
+                                <NavLink to={`/thread/${thread.id}`}>{thread.title}</NavLink>
+                                <button onClick={() => deleteThread(thread.id)}>X</button>
+                            </li>
                         </ul>
                     )
                 );

@@ -11,12 +11,14 @@ import Logout from "../components/users/Logout";
 // Topics components
 import CreateTopic from "../components/topics/CreateTopic";
 import ReadAllTopics from "../components/topics/ReadAllTopics";
-import UpdateTopic from "../components/topics/UpdateTopic";
+// import UpdateTopic from "../components/topics/UpdateTopic";
+import ReadByTopicID from "../components/topics/ReadByTopicID";
 
 // Threads components
 import CreateThread from "../components/threads/CreateThread";
 import ReadAllThreads from "../components/threads/ReadAllThreads";
-import UpdateThread from "../components/threads/UpdateThread";
+// import UpdateThread from "../components/threads/UpdateThread";
+import ReadByThreadID from "../components/threads/ReadByThreadID";
 
 // Messages components
 import CreateMessage from "../components/messages/CreateMessage";
@@ -37,12 +39,17 @@ const routes = [
     /* Topics routes*/
     {path:"/CreateTopic", component:<CreateTopic />, auth:'admin'},
     {path:"/ReadAllTopics", component:<ReadAllTopics />},
-    {path:"/Topic/:id", component:<UpdateTopic />},
+    {path:"/topic/:id", component:<ReadByTopicID />},
+    // {path:"/Topic/:id", component:<UpdateTopic />},
+    
+    // faire la navbar final
+    // faire les groupes
     
     /* Threads routes*/
     {path:"/CreateThread", component:<CreateThread />},
     {path:"/ReadAllThreads", component:<ReadAllThreads />},
-    {path:"/Thread/:id", component:<UpdateThread />},
+    {path:"/Thread/:id", component:<ReadByThreadID />},
+    // {path:"/Thread/:id", component:<UpdateThread />},
     
     /* Messages routes*/
     {path:"/CreateMessage", component:<CreateMessage />},

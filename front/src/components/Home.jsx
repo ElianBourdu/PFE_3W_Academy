@@ -1,15 +1,15 @@
 import { Fragment, useContext } from "react";
-// import { StoreContext } from '../tools/context.js';
+import { StoreContext } from '../tools/context.js';
 import ReadAllTopics from './topics/ReadAllTopics';
 import CreateTopic from './topics/CreateTopic';
 
 const Home = () => {
-    // const [state, dispatch] = useContext(StoreContext);
+    const [state] = useContext(StoreContext);
     
     return (
         <Fragment>
-            <CreateTopic />
             <ReadAllTopics />
+            { state.user.isAdmin && <CreateTopic />}
         </Fragment>
     );
 };

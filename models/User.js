@@ -47,6 +47,9 @@ export default class User {
 
         try {
             const result = await this.asyncQuery(sql, paramsSql);
+            if (!result.length) {
+                return { response: null };
+            }
             const response = await this.generateResponse(result[0]);
             const resultCompare = await bcrypt.compare(password, result[0].password);
             if (resultCompare) return { response };
@@ -54,7 +57,7 @@ export default class User {
         }
         catch (err) {
             console.log(err);
-            if (err) throw err;
+            return { response: null };
         }
     }
 

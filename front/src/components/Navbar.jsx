@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom";
-import { useEffect, useContext } from 'react';
+import { useEffect, useContext, Fragment } from 'react';
 import axios from 'axios';
 import { StoreContext } from "../tools/context.js";
 
@@ -14,8 +14,6 @@ const Navbar = (props) => {
         }
     }, [state]);
 
-
-
     return (
         <nav>
             {state.user.isLogged && <p>Welcome {state.user.role_name} {state.user.first_name} {state.user.last_name}</p>}
@@ -26,28 +24,31 @@ const Navbar = (props) => {
                     </NavLink>
                 </li>
                 <li>
-                    <NavLink to="/CreateUser">
-                        Create user
-                    </NavLink>
-                </li>
-                <li>
                     <NavLink to="/ReadAllUsers">
-                        Read all users
+                        View users list
                     </NavLink>
                 </li>
                 { !state.user.isLogged && 
-                <li>
-                    <NavLink to="/Login">
-                        Login
-                    </NavLink>
-                </li>}
+                <Fragment>
+                    <li>
+                        <NavLink to="/CreateUser">
+                            Register
+                        </NavLink>
+                    </li>
+                    <li>
+                        <NavLink to="/Login">
+                            Login
+                        </NavLink>
+                    </li>
+                </Fragment>
+                }
                 { state.user.isLogged && 
                 <li>
                     <NavLink to="/Logout">
                         Logout
                     </NavLink>
                 </li>}
-                <li>
+                {/*<li>
                     <NavLink to="/CreateTopic">
                         Create topic
                     </NavLink>
@@ -76,7 +77,7 @@ const Navbar = (props) => {
                     <NavLink to="/ReadAllMessages">
                         Read all messages
                     </NavLink>
-                </li>
+                </li>*/}
             </ul>
         </nav>
     );
