@@ -1,4 +1,5 @@
 import express from "express";
+// import path from 'path';
 import testController from "../controllers/testController.js";
 import uploadFileMiddleware from "../controllers/uploadFileMiddleware.js";
 
@@ -32,8 +33,10 @@ import readAllMsgController from "../controllers/messages/readAllMsgController.j
 import updateMsgController from "../controllers/messages/updateMsgController.js";
 import deleteMsgController from "../controllers/messages/deleteMsgController.js";
 import readMsgController from "../controllers/messages/readMsgController.js";
+import voteController from "../controllers/messages/voteController.js";
 
 const router = express.Router();
+// router.use('/public', express.static(path.join(__dirname, '../public')))
 
 router.get("/", testController);
 
@@ -66,5 +69,6 @@ router.get("/readMessages", readAllMsgController);
 router.post("/updateMessage", updateMsgController);
 router.post("/deleteMessage", deleteMsgController);
 router.post("/readMessage", readMsgController);
+router.post("/voteMessage", voteController);
 
 export default router;

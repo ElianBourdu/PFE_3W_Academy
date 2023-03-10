@@ -7,6 +7,7 @@ import { useState, useEffect, Fragment } from "react";
 const UpdateUser = () => {
     const { id } = useParams();
     const [user, setUser] = useState();
+    const defaultPP = 'default.png';
 
     useEffect(() => {
         axios.post(`${BASE_URL}/readUser`, { id })
@@ -14,15 +15,14 @@ const UpdateUser = () => {
             .catch(err => console.log(err));
     }, [id]);
 
-
     const handleChange = (e) => {
         const { name, value } = e.target;
         setUser({ ...user, [name]: value });
     };
 
     const submit = (e) => {
-        
         e.preventDefault();
+        
         const dataFile = new FormData();
         const files = { ...e.target.profil_picture.files };
 
@@ -32,11 +32,12 @@ const UpdateUser = () => {
         dataFile.append('email', user.email);
         dataFile.append('birth_date', user.birth_date.split("T")[0]);
         dataFile.append('id', id);
-        // 
-        dataFile.append('files', files[0], files[0].name);
+        // if (files[0].name) {
+            dataFile.append('files', files[0], files[0].name);
+        // }
 
         axios.post(`${BASE_URL}/updateUser`, dataFile)
-            .then(res => console.log(res))
+            .then(res => console.log('res updateUser', res))
             .catch(err => console.log(err));
     };
 
@@ -67,12 +68,18 @@ const UpdateUser = () => {
                             <label htmlFor="birth_date">birth_date</label>
                             <input type='date' name='birth_date' onChange={handleChange} value={formattingDate(user.birth_date)} />
                         </div>
+                        { user.profil_picture !== null && (
+                            <img src={require(`../../../../public/img/${user.profil_picture}`)} alt='profil'/>)
+                        }
+                        { user.profil_picture === null && (
+                            <img src={require(`../../../../public/img/${defaultPP}`)} alt='default profil'/>)
+                        }
                         <div>
                             <label name='profil_picture'>
                                 <input type='file' name='profil_picture'/>
                             </label>
                         </div>
-                        <input type='submit' />
+                        <input type='submit' value='update user !'/>
                     </form>
                 </Fragment>
             )}

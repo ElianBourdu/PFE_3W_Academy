@@ -33,14 +33,13 @@ const ReadAllthreads = (topic__id = null/*, group__id = null*/) => {
         <Fragment>
             { state.threads.length === 0 && (<p>loading</p>)}
             { state.threads.map((thread, i) => {
-                return(
+                return (
                     (topic__id.topic__id === thread.topic__id) && (
-                        <ul key={i}>
-                            <li>title: 
-                                <NavLink to={`/thread/${thread.id}`}>{thread.title}</NavLink>
-                                <button onClick={() => deleteThread(thread.id)}>X</button>
-                            </li>
-                        </ul>
+                        <div key={i}>
+                            title: 
+                            <NavLink to={`/thread/${thread.id}`}>{thread.title}</NavLink>
+                            <button onClick={() => deleteThread(thread.id)}>X</button>
+                        </div>
                     )
                 );
             })}

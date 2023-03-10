@@ -79,4 +79,18 @@ export default class Message {
             if (err) throw err;
         }
     }
+    
+    async vote({ vote, id}) {
+        let sql = "";
+        if (vote === 1) sql = "UPDATE message set like_count = like_count + 1 WHERE id = ?";
+        if (vote === -1) sql = "UPDATE message set dislike_count = dislike_count - 1 WHERE id = ?";
+        try {
+            const result = await this.asyncQuery(sql, [id]);
+            return result;
+        }
+        catch (err) {
+            console.log(err);
+            if (err) throw err;
+        }
+    }
 }

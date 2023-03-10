@@ -29,29 +29,42 @@ const ReadAllMessages = (thread__id) => {
             .catch(err => console.log(err));
     };
 
+    const handleVote = ({ vote, id }) => {
+        axios.post(`${BASE_URL}/voteMessage`, { vote, id })
+            .then(res => {
+                console.log(res);
+            })
+            .catch(error => {
+                console.log(error);
+            });
+    }
+
     return (
         <div>
             { state.messages.length === 0 && (<p>loading</p>)}
             { state.messages.map((message, i) => {
                 return (
                     ( message.thread__id === thread__id.thread__id &&
-                        <ul key={i}>
-                            <li>message :
-                                <NavLink to={`/Message/${message.id}`}>{message.content}</NavLink>
-                                <button onClick={() => deleteMessage(message.id)}>X</button>
-                                publication date : 
-                                {new Date(message.publication_date).toLocaleString('fr-FR', {
-                                    weekday: 'long',
-                                    day: 'numeric',
-                                    month: 'long',
-                                    year: 'numeric',
-                                    hour: 'numeric',
-                                    minute: 'numeric',
-                                    second: 'numeric',
-                                    hour12: false
-                                })}
-                            </li>
-                        </ul>
+                        <div key={i}>
+                            message :
+                            <NavLink to={`/Message/${message.id}`}>{message.content}</NavLink>
+                            <button onClick={() => deleteMessage(message.id)}>X</button>
+                            publication date : 
+                            {new Date(message.publication_date).toLocaleString('fr-FR', {
+                                weekday: 'long',
+                                day: 'numeric',
+                                month: 'long',
+                                year: 'numeric',
+                                hour: 'numeric',
+                                minute: 'numeric',
+                                second: 'numeric',
+                                hour12: false
+                            })}
+                            <div>like count : {message.like_count}</div>
+                            <div>dislike count : {message.dislike_count}</div>
+                            <button onClick={() => handleVote({vote: 1, id: message.id})}>Like</button>
+                            <button onClick={() => handleVote({vote: -1, id: message.id})}>Dislike</button>
+                        </div>
                     )
                 );
             })}

@@ -42,8 +42,8 @@ const ReadAllTopics = () => {
                 return(
                     <div key={i}>
                         <div className = "topic">
-                            <li>title: <NavLink to={`/topic/${topic.id}`}>{topic.title}</NavLink></li>
-                            { state.user.admin && <button onClick={() => deleteTopic(topic.id)}>X</button>}
+                            title: <NavLink to={`/topic/${topic.id}`}>{topic.title}</NavLink>
+                            { state.user.admin && <button onClick={() => deleteTopic(topic.id)}>X</button> }
                         </div>
                         <ReadAllThreads topic__id={topic.id}/>
                         <CreateThread topic__id={topic.id}/>

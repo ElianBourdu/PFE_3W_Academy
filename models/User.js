@@ -1,5 +1,6 @@
 import bcrypt from "bcrypt";
 import { generateToken } from "../config/token.js";
+import fs from 'fs'
 
 export default class User {
     constructor(bdd) {
@@ -51,8 +52,8 @@ export default class User {
                 return { response: null };
             }
             const response = await this.generateResponse(result[0]);
-            const resultCompare = await bcrypt.compare(password, result[0].password);
-            if (resultCompare) return { response };
+            const isPasswordMatching = await bcrypt.compare(password, result[0].password);
+            if (isPasswordMatching) return { response };
             return { response: null };
         }
         catch (err) {
@@ -157,5 +158,5 @@ export default class User {
             if (err) throw err;
         }
     }
-
+    
 }
