@@ -1,0 +1,40 @@
+// Colors
+$primary: #0077c2;
+$secondary: gray;
+$warning: #fcba03;
+$light-warning: #ffc72b;
+$white: #FFFFFF;
+$black: #222;
+$light-black: #777;
+
+// Breakpoints
+$breakpoints: (
+    xs: 0,
+    sm: 576px,
+    md: 768px,
+    lg: 992px,
+    xl: 1200px,
+    xxl: 1400px
+);
+
+// font-size
+$font-sizes: (
+  "xs": 12px,
+  "sm": 16px,
+  "md": 24px,
+  "lg": 32px,
+  "xl": 40px
+);
+
+// // Règle de 8
+// @function calculate-rem($size) {
+//   $rem-size: $size / 16px;
+//   @return #{$rem-size}rem;
+// }
+
+// @each $label, $size in $font-sizes {
+//   .font-size-#{$label} {
+//     font-size: calculate-rem($size);
+//   }
+// }
+

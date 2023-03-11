@@ -15,71 +15,75 @@ const Navbar = (props) => {
     }, [state]);
 
     return (
-        <nav>
-            {state.user.isLogged && <p>Welcome {state.user.role_name} {state.user.first_name} {state.user.last_name}</p>}
-            <ul>
-                <li>
-                    <NavLink to="/">
-                        Home
-                    </NavLink>
-                </li>
-                <li>
-                    <NavLink to="/ReadAllUsers">
-                        View users list
-                    </NavLink>
-                </li>
-                { !state.user.isLogged && 
-                <Fragment>
-                    <li>
-                        <NavLink to="/CreateUser">
-                            Register
+        <header className="header">
+            {state.user.isLogged && (
+            <div className="header__user-info">Welcome {state.user.role_name} {state.user.first_name} {state.user.last_name}</div>
+            )}
+            <nav className="header__nav">
+                <ul className="header__nav-list">
+                    <li className="header__nav-list-item">
+                        <NavLink className="button button--link" to="/">
+                            Home
+                        </NavLink>
+                    </li>
+                    <li className="header__nav-list-item">
+                        <NavLink className="button button--link" to="/ReadAllUsers">
+                            View users list
+                        </NavLink>
+                    </li>
+                    { !state.user.isLogged && 
+                    <Fragment>
+                        <li className="header__nav-list-item">
+                            <NavLink className="button button--link" to="/CreateUser">
+                                Register
+                            </NavLink>
+                        </li>
+                        <li className="header__nav-list-item">
+                            <NavLink className="button button--link" to="/Login">
+                                Login
+                            </NavLink>
+                        </li>
+                    </Fragment>
+                    }
+                    { state.user.isLogged && 
+                    <li className="header__nav-list-item">
+                        <NavLink className="button button--warning" to="/Logout">
+                            Logout
+                        </NavLink>
+                    </li>}
+                    {/*<li>
+                        <NavLink to="/CreateTopic">
+                            Create topic
                         </NavLink>
                     </li>
                     <li>
-                        <NavLink to="/Login">
-                            Login
+                        <NavLink to="/ReadAllTopics">
+                            Read all topics
                         </NavLink>
                     </li>
-                </Fragment>
-                }
-                { state.user.isLogged && 
-                <li>
-                    <NavLink to="/Logout">
-                        Logout
-                    </NavLink>
-                </li>}
-                {/*<li>
-                    <NavLink to="/CreateTopic">
-                        Create topic
-                    </NavLink>
-                </li>
-                <li>
-                    <NavLink to="/ReadAllTopics">
-                        Read all topics
-                    </NavLink>
-                </li>
-                <li>
-                    <NavLink to="/CreateThread">
-                        Create thread
-                    </NavLink>
-                </li>
-                <li>
-                    <NavLink to="/ReadAllThreads">
-                        Read all threads
-                    </NavLink>
-                </li>
-                <li>
-                    <NavLink to="/CreateMessage">
-                        Create message
-                    </NavLink>
-                </li>
-                <li>
-                    <NavLink to="/ReadAllMessages">
-                        Read all messages
-                    </NavLink>
-                </li>*/}
-            </ul>
-        </nav>
+                    <li>
+                        <NavLink to="/CreateThread">
+                            Create thread
+                        </NavLink>
+                    </li>
+                    <li>
+                        <NavLink to="/ReadAllThreads">
+                            Read all threads
+                        </NavLink>
+                    </li>
+                    <li>
+                        <NavLink to="/CreateMessage">
+                            Create message
+                        </NavLink>
+                    </li>
+                    <li>
+                        <NavLink to="/ReadAllMessages">
+                            Read all messages
+                        </NavLink>
+                    </li>*/}
+                </ul>
+            </nav>
+        </header>
     );
 };
 

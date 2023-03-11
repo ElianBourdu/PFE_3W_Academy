@@ -33,6 +33,10 @@ const ReadAllMessages = (thread__id) => {
         axios.post(`${BASE_URL}/voteMessage`, { vote, id })
             .then(res => {
                 console.log(res);
+                dispatch({
+                    type: "VOTE",
+                    payload: state.messages.filter(message => message.id !== id)
+                });
             })
             .catch(error => {
                 console.log(error);

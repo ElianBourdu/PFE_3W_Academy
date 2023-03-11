@@ -1,0 +1,27 @@
+.button {
+    border: 1px solid $black;
+    border-radius: .5rem;
+    background-color: $primary;
+    color: $white;
+    padding: .4rem;
+    transition: background-color .2s ease, color .2s ease;
+    
+    &--link {
+        border: none;
+        background-color: unset;
+        color: $black;
+        
+        &:hover {
+            color: $light-black;
+        }
+    }
+    
+    &--warning {
+        background-color: $warning;
+        color: $black;
+        
+        &:hover {
+            background-color: $light-warning;
+        }
+    }
+}

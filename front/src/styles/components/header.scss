@@ -1,0 +1,25 @@
+.header {
+    display: flex;
+
+    align-items: center;
+    padding: 1rem;
+    
+    // &__user-info {
+        
+    // }
+    
+    &__nav {
+        display: flex;
+        flex: 1;
+        justify-content: flex-end;
+        
+        &-list {
+            display: flex;
+            gap: 2rem;
+            
+            // &-item {
+            // 
+            // }
+        }
+    }
+}
