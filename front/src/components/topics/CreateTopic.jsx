@@ -25,10 +25,12 @@ const CreateTopic = () => {
 
 
     return (
-        <form onSubmit={submit}>
+        <form onSubmit={submit} className="topic__creation">
             <label htmlFor="title">Create your topic</label>
-            <input type='text' placeholder='title' name='title' onChange={handleChange} value={topicData.title} />
-            <input type='submit' />
+            <div className="input_container">
+                <input type='text' placeholder='title' name='title' onChange={handleChange} value={topicData.title} />
+                <input className="button--submit" type='submit' value='Create topic'/>
+            </div>
         </form>
     );
 };

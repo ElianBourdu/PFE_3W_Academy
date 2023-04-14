@@ -2,7 +2,7 @@
    v2.0 | 20110126
    License: none (public domain)
 */
-@import 'https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap';
+@import 'https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap';
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -62,7 +62,11 @@ html {
 .header {
   display: flex;
   align-items: center;
-  padding: 1rem;
+  padding: 2rem 4vw;
+  flex-direction: column;
+  gap: 20px;
+  background-color: #2c3e50;
+  color: #f2f2f2;
 }
 .header__nav {
   display: flex;
@@ -71,31 +75,277 @@ html {
 }
 .header__nav-list {
   display: flex;
-  gap: 2rem;
+  gap: 1rem;
 }
 
+@media screen and (min-width: 768px) {
+  .header {
+    flex-direction: unset;
+  }
+}
 .button {
-  border: 1px solid #222;
-  border-radius: 0.5rem;
-  background-color: #0077c2;
-  color: #FFFFFF;
-  padding: 0.4rem;
-  transition: background-color 0.2s ease, color 0.2s ease;
-}
-.button--link {
+  border-radius: 1rem;
   border: none;
-  background-color: unset;
-  color: #222;
-}
-.button--link:hover {
-  color: #777;
-}
-.button--warning {
   background-color: #fcba03;
   color: #222;
+  padding: 0.4rem;
+  transition: 0.2s;
 }
-.button--warning:hover {
+.button:hover {
   background-color: #ffc72b;
+}
+.button--link {
+  background-color: unset;
+  color: #f2f2f2;
+}
+.button--link:hover {
+  color: #222;
+}
+.button--delete {
+  border-radius: 12px;
+  border: none;
+  width: 24px;
+  height: 24px;
+}
+.button--delete--reversed {
+  background-color: #2c3e50;
+  color: #f2f2f2;
+}
+.button--submit {
+  transition: 0.2s;
+}
+.button--submit:hover {
+  background-color: #fff;
+}
+
+.topic__container {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  margin: 2rem 4vw;
+}
+.topic__title {
+  background-color: #2c3e50;
+  border-radius: 8px 8px 0 0;
+  color: #f2f2f2;
+  padding: 0.4rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.topic__creation {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  padding: 0.4rem 0.8rem;
+  border: 1px solid #2c3e50;
+  border-radius: 8px;
+  width: fit-content;
+}
+.topic__creation .input_container {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.4rem;
+}
+.topic__creation .input_container input {
+  padding: 0.4rem;
+  border-radius: 1rem;
+  border: 1px solid #2c3e50;
+}
+.topic__creation .input_container input:first-child {
+  width: 100%;
+}
+
+@media screen and (min-width: 480px) {
+  .topic__creation {
+    flex-direction: unset;
+    align-items: center;
+  }
+}
+.thread {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.4rem 0.8rem;
+  border-bottom: 1px solid #2c3e50;
+}
+.thread h2 {
+  font-weight: 700;
+}
+.thread__container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  border: 1px solid #2c3e50;
+  border-radius: 0 0 8px 8px;
+  padding: 0.4rem 0;
+}
+.thread__creation {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  padding: 0.4rem 0.8rem;
+}
+.thread__creation .input_container {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.4rem;
+}
+.thread__creation .input_container input {
+  padding: 0.4rem;
+  border-radius: 1rem;
+  border: 1px solid #2c3e50;
+}
+.thread__creation .input_container input:first-child {
+  width: 100%;
+}
+.thread--as_page {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  margin: 2rem 4vw;
+}
+.thread--as_page h2 {
+  background-color: #2c3e50;
+  border-radius: 8px;
+  color: #f2f2f2;
+  padding: 0.4rem;
+}
+
+@media screen and (min-width: 480px) {
+  .thread__creation {
+    flex-direction: unset;
+    align-items: center;
+  }
+}
+.message {
+  border: 1px solid #2c3e50;
+  border-radius: 10px;
+}
+.message__container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.message__publication-date {
+  background-color: #2c3e50;
+  border-radius: 8px 8px 0 0;
+  color: #f2f2f2;
+  padding: 0.4rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.message__content {
+  padding: 0.4rem;
+}
+.message__vote {
+  padding: 0.4rem;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.4rem;
+}
+.message__creation {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  padding: 0.8rem;
+  border: 1px solid #2c3e50;
+  border-radius: 8px;
+}
+.message__creation input {
+  padding: 0.4rem;
+  border-radius: 1rem;
+  border: 1px solid #2c3e50;
+}
+.message__creation textarea {
+  resize: none;
+  height: 4rem;
+  border-radius: 8px;
+}
+
+@media screen and (min-width: 480px) {
+  .message__creation {
+    width: 40vw;
+  }
+  .message__creation input {
+    max-width: 300px;
+  }
+}
+.user {
+  border: 1px solid #2c3e50;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+  margin: 40px auto;
+}
+.user__profil-picture {
+  width: 200px;
+  height: auto;
+  margin: auto;
+  display: block;
+}
+.user__container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+  margin: 2rem 4vw;
+}
+.user__detail {
+  background-color: #2c3e50;
+  border-radius: 8px 8px 0 0;
+  color: #f2f2f2;
+  padding: 0.4rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.4rem;
+  flex-direction: column;
+}
+.user__detail input {
+  border-radius: 1rem;
+  border: none;
+  padding: 0.4rem;
+}
+.user__name {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+.user__ban {
+  display: flex;
+  gap: 0.4rem;
+  flex-direction: column;
+}
+.user__ban label {
+  width: 100%;
+  display: block;
+}
+.user__ban input {
+  border-radius: 1rem;
+  border: none;
+  padding: 0.4rem;
+}
+.user__login, .user__register {
+  display: flex;
+  flex-direction: column;
+  margin: 40px auto;
+  width: 300px;
+  padding: 1rem;
+  border-radius: 1rem;
+  border: none;
+  gap: 0.4rem;
+  background-color: #2c3e50;
+  color: #f2f2f2;
+}
+.user__login input, .user__register input {
+  padding: 0.4rem;
+  border-radius: 1rem;
+  border: 1px solid #2c3e50;
 }
 
 /*# sourceMappingURL=index.css.map */

@@ -34,10 +34,12 @@ const CreateThread = (topic__id) => {
 
 
     return (
-        <form onSubmit={submit}>
+        <form onSubmit={submit} className="thread__creation">
             <label htmlFor="title">Create your thread</label>
-            <input type='text' placeholder='title' name='title' onChange={handleChange} value={threadData.title} />
-            <input type='submit' />
+            <div className="input_container">
+                <input type='text' placeholder='Title' name='title' onChange={handleChange} value={threadData.title} />
+                <input className="button--submit" type='submit' value="Create thread"/>
+            </div>
         </form>
     );
 };

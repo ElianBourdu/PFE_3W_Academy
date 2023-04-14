@@ -1,21 +1,11 @@
 // Colors
-$primary: #0077c2;
-$secondary: gray;
-$warning: #fcba03;
-$light-warning: #ffc72b;
-$white: #FFFFFF;
+$primary: #fcba03;
+$primary-lighter: #ffc72b;
+$secondary: #2c3e50;
+$white: #f2f2f2;
+$white-lighter: #fff;
 $black: #222;
 $light-black: #777;
-
-// Breakpoints
-$breakpoints: (
-    xs: 0,
-    sm: 576px,
-    md: 768px,
-    lg: 992px,
-    xl: 1200px,
-    xxl: 1400px
-);
 
 // font-size
 $font-sizes: (
@@ -24,6 +14,15 @@ $font-sizes: (
   "md": 24px,
   "lg": 32px,
   "xl": 40px
+);
+
+// breakpoints
+$breakpoints: (
+        xs: 0,
+        sm: 480px,
+        md: 768px,
+        lg: 1024px,
+        xl: 1380px,
 );
 
 // // Règle de 8

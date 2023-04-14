@@ -31,12 +31,16 @@ const AddUser = () => {
 
 
     return (
-        <form onSubmit={submit}>
+        <form className='user__register' onSubmit={submit}>
+            <label htmlFor="last_name">last_name</label>
             <input type='text' placeholder='last_name' name='last_name' onChange={handleChange} value={userData.last_name} />
+            <label htmlFor="first_name">first_name</label>
             <input type='text' placeholder='first_name' name='first_name' onChange={handleChange} value={userData.first_name} />
+            <label htmlFor="email">email</label>
             <input type='text' placeholder='email' name='email' onChange={handleChange} value={userData.email} />
+            <label htmlFor="password">password</label>
             <input type='text' placeholder='password' name='password' onChange={handleChange} value={userData.password} />
-            <input type='submit' />
+            <input className="button--submit" type='submit' value='Create account'/>
         </form>
     );
 };

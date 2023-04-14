@@ -12,6 +12,7 @@ import readUserController from "../controllers/users/readUserController.js";
 import loginMiddleware from "../controllers/users/loginMiddleware.js";
 import loginController from "../controllers/users/loginController.js";
 import checkToken from "../controllers/users/checkToken.js";
+import banUserController from "../controllers/users/banUserController.js";
 
 // TOPICS
 import createTopicController from "../controllers/topics/createTopicController.js";
@@ -48,6 +49,7 @@ router.post("/deleteUser", deleteUserController);
 router.post("/readUser", readUserController);
 router.post("/login", loginMiddleware, loginController);
 router.get("/reconnection", checkToken);
+router.post("/ban", banUserController);
 
 // routes related to topics
 router.post("/createTopic", createTopicController);

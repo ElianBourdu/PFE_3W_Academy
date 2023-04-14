@@ -2,11 +2,14 @@ import axios from "axios";
 import { BASE_URL } from '../../tools/utils.js';
 import { useEffect, useState, Fragment } from "react";
 import { NavLink } from 'react-router-dom';
+import { faTrashCan } from '@fortawesome/free-regular-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 
 const ReadAllUsers = () => {
     const [usersList, setUsersList] = useState([]);
     const defaultPP = 'default.png';
+    
     
     useEffect(() => {
         if (usersList.length === 0) {
@@ -24,30 +27,55 @@ const ReadAllUsers = () => {
             .catch(err => console.log(err));
     };
 
+    const [banDate, setBanDate] = useState({});
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setBanDate({ ...banDate, [name]: value });
+        console.log(banDate)
+    };
+
+    const banUser = (e, id) => {
+        e.preventDefault();
+        axios
+            .post(`${BASE_URL}/ban`, {
+                id: id,
+                ban_date: banDate.ban_date
+            })
+            .then(res => {
+                console.log(res);
+            });
+    };
+
     return (
-        <ul>
+        <div className="user__container">
             { usersList.length === 0 && (<p>loading</p>) }
             { usersList.map((user, i) => {
                 return(
-                    <Fragment key={i}>
-                        <li>Nom:<NavLink to={`/user/${user.id}`}>{user.last_name}</NavLink></li>
-                        <li>Prenom: {user.first_name}</li>
+                    <div key={i} className='user'>
+                        <div className="user__detail">
+                            <div className="user__name">
+                                <p><NavLink className="button button--link" to={`/user/${user.id}`}>{user.first_name} {user.last_name}</NavLink></p>
+                                <button className='button--delete' onClick={() => deleteUser(user.id)}>
+                                    <FontAwesomeIcon icon={faTrashCan} />
+                                </button>
+                            </div>
+                            <form onSubmit={(e) => banUser(e, user.id)} className="user__ban">
+                                <label htmlFor="ban user">Ban this user until :</label>
+                                <input id="ban_date" type="datetime-local" name="ban_date" onChange={handleChange} value={banDate.value}/>
+                                <input className="button--submit" type="submit" value="ban"/>
+                            </form>
+                        </div>
                         { user.profil_picture !== null && (
-                            <li><img src={require(`../../../../public/img/${user.profil_picture}`)} alt='profil'/></li>)
+                            <img className='user__profil-picture' src={require(`../../../../public/img/${user.profil_picture}`)} alt='profil'/>)
                         }
                         { user.profil_picture === null && (
-                            <img src={require(`../../../../public/img/${defaultPP}`)} alt='default profil'/>)
+                            <img className='user__profil-picture' src={require(`../../../../public/img/${defaultPP}`)} alt='default profil'/>)
                         }
-                        <button onClick={() => deleteUser(user.id)}>X</button>
-                        <form>
-                            <label htmlFor="ban user">Choose a date to ban this user !</label>
-                            <input id="ban user" type="datetime-local" name="ban user"/>
-                            <input type="submit" value="Ban this user !"/>
-                        </form>
-                    </Fragment>
+                    </div>
                 );
             })}
-        </ul>
+        </div>
     );
 };
 

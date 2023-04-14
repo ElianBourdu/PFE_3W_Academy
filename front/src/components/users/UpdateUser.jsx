@@ -50,38 +50,30 @@ const UpdateUser = () => {
         <Fragment>
             { !user && (<p>loading</p>)}
             { user && (
-                <Fragment>
+                <div className='user'>
                     <form onSubmit={submit} encType="multipart/form-data">
-                        <div>
+                        <div className="user__detail">
                             <label htmlFor="last_name">last_name</label>
                             <input type='text' name='last_name' placeholder='last_name' onChange={handleChange} value={user.last_name} />
-                        </div>
-                        <div>
                             <label htmlFor="first_name">first_name</label>
                             <input type='text' name='first_name' placeholder='first_name' onChange={handleChange} value={user.first_name} />
-                        </div>
-                        <div>
                             <label htmlFor="email">email</label>
                             <input type='text' name='email' placeholder='email' onChange={handleChange} value={user.email} />
-                        </div>
-                        <div>
                             <label htmlFor="birth_date">birth_date</label>
                             <input type='date' name='birth_date' onChange={handleChange} value={formattingDate(user.birth_date)} />
-                        </div>
-                        { user.profil_picture !== null && (
-                            <img src={require(`../../../../public/img/${user.profil_picture}`)} alt='profil'/>)
-                        }
-                        { user.profil_picture === null && (
-                            <img src={require(`../../../../public/img/${defaultPP}`)} alt='default profil'/>)
-                        }
-                        <div>
-                            <label name='profil_picture'>
+                            <label htmlFor='profil_picture'>
                                 <input type='file' name='profil_picture'/>
                             </label>
+                            <input type='submit' value='update user !'/>
                         </div>
-                        <input type='submit' value='update user !'/>
+                        { user.profil_picture !== null && (
+                            <img className='user__profil-picture' src={require(`../../../../public/img/${user.profil_picture}`)} alt='profil'/>)
+                        }
+                        { user.profil_picture === null && (
+                            <img className='user__profil-picture' src={require(`../../../../public/img/${defaultPP}`)} alt='default profil'/>)
+                        }
                     </form>
-                </Fragment>
+                </div>
             )}
         </Fragment>
     );

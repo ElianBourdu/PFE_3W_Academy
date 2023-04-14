@@ -18,7 +18,7 @@ export default class User {
             id: userDataSQL.id,
             first_name: userDataSQL.first_name,
             last_name: userDataSQL.last_name,
-            birth_date: userDataSQL.birth_date.toLocaleDateString('fr-FR'),
+            birth_date: userDataSQL.birth_date?.toLocaleDateString('fr-FR'),
             last_connection: userDataSQL.last_connection,
             profil_picture: userDataSQL.profil_picture,
             ban_date: userDataSQL.ban_date,
@@ -38,7 +38,7 @@ export default class User {
     async login({ email, password }) {
         // const sql = "SELECT * FROM user WHERE email = ?";
         const sql = `
-        SELECT u.*, role_name 
+        SELECT u.*, role_name, ban_date > NOW() as isBanned
         FROM user u
         JOIN role r
         	ON u.role__id = r.id
@@ -49,16 +49,34 @@ export default class User {
         try {
             const result = await this.asyncQuery(sql, paramsSql);
             if (!result.length) {
-                return { response: null };
+                return { response: null, error: 'USER_NOT_FOUND', error_msg: `${email} not found` };
             }
             const response = await this.generateResponse(result[0]);
+            const isBanned = result[0].isBanned === 1;
             const isPasswordMatching = await bcrypt.compare(password, result[0].password);
+            if (isPasswordMatching && isBanned) return { response: null, error: 'BAN', error_msg: `Your are banned until ${result[0].ban_date}` };
             if (isPasswordMatching) return { response };
-            return { response: null };
+            return { response: null, error: "WRONG_PASSWORD", error_msg: 'incorrect password' };
         }
         catch (err) {
             console.log(err);
             return { response: null };
+        }
+    }
+    
+    async ban({ ban_date, id }) {
+        const sql = `
+        UPDATE user 
+        SET ban_date = ?
+        WHERE id = ?
+        `;
+        try {
+            const result = await this.asyncQuery(sql, [ban_date, id]);
+            return result;
+        }
+        catch (err) {
+            console.log(err);
+            if (err) throw err;
         }
     }
 
@@ -94,7 +112,7 @@ export default class User {
             const mpdHash = await bcrypt.hash(password, this.saltRounds);
 
             // create param list to add user
-            const paramsSql = [1, first_name, last_name, email, mpdHash];
+            const paramsSql = [3, first_name, last_name, email, mpdHash];
 
             // request bdd
             const createUser = await this.asyncQuery(sql, paramsSql);

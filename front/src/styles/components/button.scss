@@ -1,27 +1,41 @@
 .button {
-    border: 1px solid $black;
-    border-radius: .5rem;
+    border-radius: 1rem;
+    border: none;
     background-color: $primary;
-    color: $white;
+    color: $black;
     padding: .4rem;
-    transition: background-color .2s ease, color .2s ease;
-    
+    transition: .2s;
+
+    &:hover {
+        background-color: $primary-lighter;
+    }
+
     &--link {
-        border: none;
         background-color: unset;
-        color: $black;
-        
+        color: $white;
+
         &:hover {
-            color: $light-black;
+            color: $black;
+        }
+    }
+
+    &--delete {
+        border-radius: 12px;
+        border: none;
+        width: 24px;
+        height: 24px;
+
+        &--reversed {
+            background-color: $secondary;
+            color: $white;
         }
     }
     
-    &--warning {
-        background-color: $warning;
-        color: $black;
+    &--submit {
+        transition: .2s;
         
         &:hover {
-            background-color: $light-warning;
+            background-color: $white-lighter;
         }
     }
 }

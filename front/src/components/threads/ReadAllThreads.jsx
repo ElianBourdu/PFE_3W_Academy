@@ -3,6 +3,8 @@ import { BASE_URL } from '../../tools/utils.js';
 import { useEffect, Fragment, useContext } from "react";
 import { StoreContext } from '../../tools/context.js';
 import { NavLink } from 'react-router-dom';
+import { faTrashCan } from '@fortawesome/free-regular-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const ReadAllthreads = (topic__id = null/*, group__id = null*/) => {
     const [state, dispatch] = useContext(StoreContext);
@@ -35,10 +37,13 @@ const ReadAllthreads = (topic__id = null/*, group__id = null*/) => {
             { state.threads.map((thread, i) => {
                 return (
                     (topic__id.topic__id === thread.topic__id) && (
-                        <div key={i}>
-                            title: 
-                            <NavLink to={`/thread/${thread.id}`}>{thread.title}</NavLink>
-                            <button onClick={() => deleteThread(thread.id)}>X</button>
+                        <div className="thread" key={i}>
+                            <NavLink to={`/thread/${thread.id}`}>
+                                <h2>{thread.title}</h2>
+                            </NavLink>
+                            <button className='button--delete button--delete--reversed' onClick={() => deleteThread(thread.id)}>
+                                <FontAwesomeIcon icon={faTrashCan} />
+                            </button>
                         </div>
                     )
                 );

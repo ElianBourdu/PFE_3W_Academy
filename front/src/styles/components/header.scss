@@ -1,25 +1,34 @@
 .header {
     display: flex;
-
     align-items: center;
-    padding: 1rem;
+    padding: 2rem 4vw;
+    flex-direction: column;
+    gap: 20px;
+    background-color: $secondary;
+    color: $white;
     
-    // &__user-info {
-        
-    // }
+    &__user-info {
+    
+    }
     
     &__nav {
         display: flex;
         flex: 1;
         justify-content: flex-end;
-        
+
         &-list {
             display: flex;
-            gap: 2rem;
+            gap: 1rem; 
             
             // &-item {
             // 
             // }
         }
+    }
+}
+
+@media screen and (min-width: map-get($breakpoints, md)) {
+    .header {
+        flex-direction: unset;
     }
 }

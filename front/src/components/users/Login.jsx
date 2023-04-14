@@ -9,6 +9,7 @@ const Login = () => {
     const [state, dispatch] = useContext(StoreContext);
     const [info, setInfo] = useState(initialState);
     const navigate = useNavigate();
+    const [error, setError] = useState('');
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -22,7 +23,7 @@ const Login = () => {
                 console.log(res);
                 if (res.data.login.response === null) {
                     setInfo(initialState);
-                    return console.log('connection error occurred')
+                    setError(res.data.login.error_msg); 
                 } else {
                     localStorage.setItem('jwtToken', res.data.login.response.token);
                     axios.defaults.headers.common['Authorization'] = 'Bearer ' + res.data.login.response.token;
@@ -34,16 +35,13 @@ const Login = () => {
     };
 
     return (
-        <form onSubmit={submit}>
-            <div>
-                <label htmlFor="email">email</label>
-                <input type='text' name='email' placeholder='email' onChange={handleChange} value={info.email} />
-            </div>
-            <div>
-                <label htmlFor="password">password</label>
-                <input type='password' name='password' placeholder='password' onChange={handleChange} value={info.password} />
-            </div>
-            <input type="submit" />
+        <form onSubmit={submit} className='user__login'>
+            <label htmlFor="email">email</label>
+            <input type='text' name='email' placeholder='email' onChange={handleChange} value={info.email} />
+            <label htmlFor="password">password</label>
+            <input type='password' name='password' placeholder='password' onChange={handleChange} value={info.password} />
+            <input className="button--submit" type="submit" value='login'/>
+            { error && <div>{error}</div>}
         </form>
     );
 };

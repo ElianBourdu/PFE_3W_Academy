@@ -40,9 +40,9 @@ const CreateMessage = (thread__id) => {
     };
 
     return (
-        <form onSubmit={submit}>
+        <form onSubmit={submit} className="message__creation">
             <textarea placeholder='type your message' name='content' onChange={handleChange} value={messageData.content}></textarea>
-            <input type='submit' />
+            <input className="button--submit" type='submit' value='Create message'/>
         </form>
     );
 };

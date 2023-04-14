@@ -7,10 +7,10 @@ const Home = () => {
     const [state] = useContext(StoreContext);
     
     return (
-        <Fragment>
+        <div className="topic__container">
             <ReadAllTopics />
             { state.user.isAdmin && <CreateTopic />}
-        </Fragment>
+        </div>
     );
 };
 

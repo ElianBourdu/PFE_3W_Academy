@@ -5,6 +5,8 @@ import { NavLink } from 'react-router-dom';
 import { StoreContext } from '../../tools/context.js';
 import CreateThread from '../threads/CreateThread';
 import ReadAllThreads from '../threads/ReadAllThreads';
+import { faTrashCan } from '@fortawesome/free-regular-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const ReadAllTopics = () => {
     const [state, dispatch] = useContext(StoreContext);
@@ -40,13 +42,18 @@ const ReadAllTopics = () => {
             { state.topics.length === 0 && (<p>loading</p>)}
             {state.topics.map((topic, i) => {
                 return(
-                    <div key={i}>
-                        <div className = "topic">
-                            title: <NavLink to={`/topic/${topic.id}`}>{topic.title}</NavLink>
-                            { state.user.admin && <button onClick={() => deleteTopic(topic.id)}>X</button> }
+                    <div className="topic" key={i}>
+                        <div className="topic__title">
+                            <NavLink className="button button--link" to={`/topic/${topic.id}`}>{topic.title}</NavLink>
+                            { state.user.admin && 
+                            <button className='button--delete' onClick={() => deleteTopic(topic.id)}>
+                                <FontAwesomeIcon icon={faTrashCan} />
+                            </button> }
                         </div>
-                        <ReadAllThreads topic__id={topic.id}/>
-                        <CreateThread topic__id={topic.id}/>
+                        <div className="thread__container">
+                            <ReadAllThreads topic__id={topic.id}/>
+                            <CreateThread topic__id={topic.id}/>
+                        </div>
                     </div>
                 );
             })}
